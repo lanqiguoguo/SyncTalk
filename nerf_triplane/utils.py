@@ -1620,7 +1620,7 @@ class AudDataset(object):
         wav = load_wav(wavpath, 16000)
 
         self.orig_mel = melspectrogram(wav).T
-        self.data_len = int((self.orig_mel.shape[0] - 16) / 80. * float(25))
+        self.data_len = int((self.orig_mel.shape[0] - 16) / 80. * float(25)) + 2
 
     def get_frame_id(self, frame):
         return int(basename(frame).split('.')[0])
@@ -1633,6 +1633,10 @@ class AudDataset(object):
         start_idx = int(80. * (start_frame_num / float(25)))
 
         end_idx = start_idx + 16
+        if end_idx > spec.shape[0]:
+            # print(end_idx, spec.shape[0])
+            end_idx = spec.shape[0]
+            start_idx = end_idx - 16
 
         return spec[start_idx: end_idx, :]
 
