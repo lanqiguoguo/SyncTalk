@@ -59,6 +59,7 @@ pip install ./freqencoder
 pip install ./shencoder
 pip install ./gridencoder
 pip install ./raymarching
+pip install mediapipe
 ```
 If you encounter problems installing PyTorch3D, you can use the following command to install it:
 ```bash
